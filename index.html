@@ -1,0 +1,293 @@
+<meta charset="utf-8">
+<style>
+
+@font-face {
+    font-family: myFont;
+    src: url(Quicksand-Bold.otf);
+    font-weight: bold;
+    font-size: 20px;
+    color:rgba(57,75,99, 0.6);
+}
+.node {
+  cursor: pointer;
+  /*filter: drop-shadow(12px 12px 7px rgba(0,0,0,0.5));
+  filter: url(#drop-shadow); */
+}
+
+.node:hover {
+  stroke: #000;
+  stroke-width: 1.0px; 
+  opacity: 0.5;
+}
+
+.node--leaf {
+  fill: rgb(228, 241, 254);
+}
+
+.label {
+  fill:rgba(57,75,99, 0.6);
+  font-family: myFont;
+  /*font: 14px "Rokkitt", Helvetica, Arial, sans-serif;*/
+  /*font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+  text-anchor: middle;
+  /*text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;*/
+}
+
+.label,
+.node--root,
+.node--leaf {
+  pointer-events: none;
+}
+
+.footer{
+  font-family: myFont;
+  font-size: 20px;
+  color:rgba(57,75,99, 0.5);
+  text-align: center;
+}
+
+</style>
+<body >
+
+<script src="d3.v3.min.js"></script>
+<script>
+
+var root =  
+  {
+   "name": "Personal Profile",
+   "children": [
+    {
+     "name": "Personal Information",
+     "children": [
+      {"name": "Name : Mr.Anawin Chuklee (Karn)", "size": 23500},
+      {"name": "Age : 26", "size": 800},
+      {"name": "Address : 67/697 Bangmaenang, Bangyai, Nonthaburi", "size": 16603},
+      {"name": "Phone : 084-907-9858", "size": 6560},
+      {"name": "E-mail : anawin.chu@gmail.com , gaanz12@gmail.com", "size": 15602}    
+     ]
+    },
+    {
+     "name": "Education",
+     "children": [
+      {"name": "King Mongkut's Institute of Technology Ladkrabang.", "size": 20038},
+      {"name": "Bachelor : Computer Engineering 2008 -2011", "size": 15824}
+    
+     ]
+    },
+    {
+     "name": "Work Experience",
+     "children": [
+      {"name": "Smart Office Ltd. May 2011 – May 2013",
+
+      "children":[
+        {
+         "name": "Project",
+         "children": [
+          {"name": "Project - Expressway Authority of Thailand", "size":5569},
+          {"name": "Project - TOT Billing", "size": 698}         
+         ]
+        }
+      ]
+        
+      },
+      {"name": "Stone Apple Ltd. May 2013 – Present",
+      "children":[
+        {
+         "name": "Project",
+         "children": [
+          {"name": "Project - AIS eService", "size":4569},
+          {"name": "Project - AIS Equinox", "size": 4300},
+          {"name": "Project - AIS Hadoop-TableAu", "size": 6300}
+         ]
+        }
+      ]      
+      }
+     ]
+    },    
+    {
+     "name": "Areas of Expertise",
+     "children": [
+      {"name": "4+ years of experience in software development includes", "size": 20859},
+      {"name": "Getting requirements", "size": 4614},
+      {"name": "Analysis Solution", "size": 4614},
+      {"name": "Design and Development of Web-based applications", "size": 10000},
+      {"name": "Design and Development of Mobile applications", "size": 10000},
+      {"name": "Design and Development of Core-business applications", "size": 10000}
+     ]
+    },
+    {
+     "name": "Technical Skills",
+     "children": [
+      {
+       "name": "Java",
+       "children": [
+        {"name": "Map Reduce", "size": 4461},
+        {"name": "ElasticSearch", "size": 6314},
+        {"name": "Logstash", "size": 6314},
+        {"name": "JUnit", "size": 3444},
+        {"name": "Java EE", "children": [
+        {"name": "Servlet", "size": 4461},
+        {"name": "Spring", "size": 4461},
+        {"name": "Struts", "size": 4461},
+        {"name": "JSP", "size": 4461},
+        {"name": "JSF", "size": 4461},
+        {"name": "JBDC", "size": 6314},
+        {"name": "Hibernate", "size": 6314},
+        {"name": "JPA", "size": 3000},
+        {"name": "JAX-WS", "size": 3000},
+        {"name": "Axis , Jersey", "size": 3000}
+       ]}
+       ]
+      },
+      {
+       "name": ".NET",
+       "children": [
+        {"name": "VB , C#", "size": 1830},
+        {"name": ".NET 3.5", "size": 3179},
+        {"name": ".NET 4.0", "size": 4060},
+        {"name": "ASP.NET MVC", "size": 4138},
+        {"name": "Windows Forms", "size": 1690}
+       ]
+      },
+      {
+       "name": "NoSQL",
+       "children": [
+        {"name": "Redis", "size": 5219},
+        {"name": "Cassandra", "size": 6200}
+       ]
+      },
+      {
+       "name": "RDBMS",
+       "children": [
+        {"name": "Oracle 10g,11g (PL/SQL)" , "size" : 4000},
+        {"name": "SQL Server 2008,2012 (T-SQL)", "size": 3899},
+        {"name": "MySQL", "size": 3202}
+       ]
+      },
+      {
+       "name": "Other Tools",
+       "children": [
+        {"name": "TableAu", "size": 6725},
+        {"name": "Oracle Service Bus", "size": 3727},
+        {"name": "Oracle BI", "size": 9317},
+        {"name": "SSIS SQL Server", "size": 12003},
+        {"name": "Jasper Report", "size": 4853},
+        {"name": "Crystal report", "size": 4853}
+       ]
+      },
+      {
+       "name": "Front-End",
+       "children": [
+        {"name": "Javascript", "size": 6725},
+        {"name": "HTML", "size": 3727},
+        {"name": "CSS", "size": 9317},
+        {"name": "Jquery", "size": 12003},
+        {"name": "AngularJS", "size": 4853},
+        {"name": "Bootstrap", "size": 8411},
+        {"name": "D3", "size": 4864},
+        {"name": "YUI", "size": 3174}
+       ]
+      },
+      {
+       "name": "Software development process",
+       "children": [
+        {"name": "Agile", "size": 6725},
+        {"name": "Scrum", "size": 3727},
+        {"name": "eXtreme Programming", "size": 9317},
+        {"name": "Waterfall", "size": 12003}
+       ]
+      }
+     ]
+    },
+    {"name": "Software Engineer", "size": 175000}
+   ]
+  }
+;
+
+
+var margin = 20,
+    diameter = 1000;
+
+var color = d3.scale.linear()
+    .domain([-2,3])
+    /*.range(["rgb(255,224,130)","rgb(255,213 ,79)","rgb(255,202,40)"])*/
+    .range(["rgb(255,224,130)" ,"rgb(255 ,111,0)"]) 
+    .interpolate(d3.interpolateHcl);
+
+var pack = d3.layout.pack()
+    .padding(2)
+    .size([diameter - margin, diameter - margin])
+    .value(function(d) { return d.size; })
+
+var svg = d3.select("body").append("div")
+    .style("text-align", "center")
+    .style("vertical-align", "middle")      
+    .append("svg")
+    .attr("width", diameter)
+    .attr("height", diameter)
+  .append("g")
+    .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
+
+
+  var focus = root,
+      nodes = pack.nodes(root),
+      view;
+
+  var circle = svg.selectAll("circle")
+      .data(nodes)
+    .enter().append("circle")
+      .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
+      .style("fill", function(d) { return d.children ? color(d.depth) : "rgb(255 , 248 , 225)"; })
+      .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
+
+  var text = svg.selectAll("text")
+      .data(nodes)
+    .enter().append("text")
+      .attr("class", "label")
+      .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
+      .style("font-size", function(d) { return d.name === "Software Engineer" ? "30px" : "20px"; })
+      .style("display", function(d) { return d.parent === root ? null : "none"; })
+      .text(function(d) { return d.name; });
+
+  var node = svg.selectAll("circle,text");
+
+  d3.select("body")
+      .style("background", color(-1))
+      .on("click", function() { zoom(root); });
+
+  zoomTo([root.x, root.y, root.r * 2 + margin]);
+
+  function zoom(d) {
+    var focus0 = focus; focus = d;
+
+    var transition = d3.transition()
+        .duration(d3.event.altKey ? 7500 : 750)
+        .tween("zoom", function(d) {
+          var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
+          return function(t) { zoomTo(i(t)); };
+        });
+
+    transition.selectAll("text")
+      .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
+        .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
+        .each("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
+        .each("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
+  }
+
+  function zoomTo(v) {
+    var k = diameter / v[2]; view = v;
+    node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
+    circle.attr("r", function(d) { return d.r * k; });
+  }
+
+d3.select(self.frameElement).style("height", diameter + "px");
+
+
+
+</script>
+
+<div class="footer">   
+      Powered by <b>D3</b><br>
+      Anawin Chuklee<br>(Tel.084-907-9858)  
+ </div>
+ </body>
