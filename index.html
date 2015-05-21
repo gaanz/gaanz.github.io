@@ -210,7 +210,7 @@ var margin = 20,
 var color = d3.scale.linear()
     .domain([-2,3])
     /*.range(["rgb(255,224,130)","rgb(255,213 ,79)","rgb(255,202,40)"])*/
-    .range(["rgb(255,224,130)" ,"rgb(255 ,111,0)"]) 
+    .range(["rgb(198, 255, 0)" ,"rgb(29, 233, 182)"]) 
     .interpolate(d3.interpolateHcl);
 
 var pack = d3.layout.pack()
@@ -236,7 +236,7 @@ var svg = d3.select("body").append("div")
       .data(nodes)
     .enter().append("circle")
       .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
-      .style("fill", function(d) { return d.children ? color(d.depth) : "rgb(255 , 248 , 225)"; })
+      .style("fill", function(d) { return d.children ? color(d.depth) : "rgb(249, 251, 231)"; })
       .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
 
   var text = svg.selectAll("text")
